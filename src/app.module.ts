@@ -6,6 +6,8 @@ import { AppService } from './app.service';
 import { ParejasModule } from './parejas/parejas.module';
 import { Pareja } from './parejas/entities/pareja.entity';
 import { SesionesModule } from './sesiones/sesiones.module';
+import { Sesion } from './sesiones/entities/sesion.entity'; 
+import { PreguntasModule } from './preguntas/preguntas.module';
 
 @Module({
   imports: [
@@ -17,11 +19,12 @@ import { SesionesModule } from './sesiones/sesiones.module';
       username: process.env.DB_USER || 'root',
       password: process.env.DB_PASSWORD || '',
       database: process.env.DB_DATABASE || 'test',
-      entities: [Pareja],
+      entities: [Pareja, Sesion],
       synchronize: true, // Solo para desarrollo
     }),
     ParejasModule,
     SesionesModule,
+    PreguntasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
