@@ -9,6 +9,7 @@ import { SesionesModule } from './sesiones/sesiones.module';
 import { Sesion } from './sesiones/entities/sesion.entity'; 
 import { PreguntasModule } from './preguntas/preguntas.module';
 
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -25,6 +26,7 @@ import { PreguntasModule } from './preguntas/preguntas.module';
     ParejasModule,
     SesionesModule,
     PreguntasModule,
+ 
   ],
   controllers: [AppController],
   providers: [AppService],
