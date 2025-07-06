@@ -21,6 +21,123 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+# Terapia Backend
+
+Backend para aplicación de terapia de parejas con NestJS, TypeORM y MySQL.
+
+## Características
+
+- **Parejas**: CRUD completo para gestión de parejas
+- **Sesiones**: Gestión de sesiones de terapia con fechas y costos
+- **Preguntas**: Sistema de preguntas entre parejas con opciones y respuestas
+- **Base de datos**: MySQL con TypeORM
+- **Docker**: Configuración completa para desarrollo y producción
+
+## Configuración
+
+### Variables de Entorno
+
+Crea un archivo `.env` en la raíz del proyecto:
+
+```env
+# Puerto de la aplicación
+PORT=3000
+
+# Entorno
+NODE_ENV=development
+
+# JWT Secret
+JWT_SECRET=queso
+
+# Configuración de la base de datos MySQL
+DB_TYPE=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=locura
+DB_DATABASE=auth_users
+```
+
+## Ejecución con Docker
+
+### Desarrollo
+
+```bash
+# Construir y ejecutar con Docker Compose
+docker-compose up --build
+
+# Ejecutar en segundo plano
+docker-compose up -d --build
+```
+
+### Producción
+
+```bash
+# Construir imagen
+docker build -t terapia-backend .
+
+# Ejecutar contenedor
+docker run -p 3000:3000 terapia-backend
+```
+
+## Ejecución Local
+
+### Instalar dependencias
+
+```bash
+npm install
+```
+
+### Ejecutar en desarrollo
+
+```bash
+npm run start:dev
+```
+
+### Ejecutar en producción
+
+```bash
+npm run build
+npm run start:prod
+```
+
+## Endpoints
+
+### Parejas
+- `POST /parejas` - Crear pareja
+- `GET /parejas` - Obtener todas las parejas
+- `GET /parejas/:id` - Obtener pareja por ID
+- `PATCH /parejas/:id` - Actualizar pareja
+- `DELETE /parejas/:id` - Eliminar pareja
+
+### Sesiones
+- `POST /sesiones` - Crear sesión
+- `GET /sesiones` - Obtener todas las sesiones
+- `GET /sesiones/proximas` - Obtener sesiones próximas en 7 días
+- `PATCH /sesiones/:id` - Actualizar sesión
+- `DELETE /sesiones/:id` - Eliminar sesión
+
+### Preguntas
+- `POST /preguntas/crear` - Crear pregunta
+- `POST /preguntas/opcion` - Añadir opción
+- `POST /preguntas/enviar` - Enviar pregunta
+- `POST /preguntas/responder` - Responder pregunta
+- `GET /preguntas/pareja/:id` - Obtener preguntas por pareja
+- `GET /preguntas/creador/:id` - Obtener preguntas por creador
+- `GET /preguntas/destinatario/:id` - Obtener preguntas por destinatario
+- `GET /preguntas/opciones/:id` - Obtener opciones de pregunta
+
+## Estructura del Proyecto
+
+```
+src/
+├── config/           # Configuración de variables de entorno
+├── parejas/          # Módulo de parejas
+├── sesiones/         # Módulo de sesiones
+├── preguntas/        # Módulo de preguntas
+└── app.module.ts     # Módulo principal
+```
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
