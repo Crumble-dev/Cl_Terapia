@@ -1,15 +1,17 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateParejaDto } from './dto/create-pareja.dto';
 import { UpdateParejaDto } from './dto/update-pareja.dto';
 import { Pareja } from './entities/pareja.entity';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class ParejasService {
   constructor(
     @InjectRepository(Pareja)
     private readonly parejaRepository: Repository<Pareja>,
+    @Inject('NATS_SERVICE') private readonly natsService: ClientProxy, 
   ) {}
 
   async create(createParejaDto: CreateParejaDto): Promise<Pareja> {
@@ -35,7 +37,14 @@ export class ParejasService {
 
   async remove(id: number): Promise<{ idParejaA: number; idParejaB: number }> {
     const pareja = await this.findOne(id);
+    // Guarda los datos antes de eliminar
+    const idPareja = pareja.id;
+    const idParejaA = pareja.idParejaA;
+    const idParejaB = pareja.idParejaB;
     await this.parejaRepository.remove(pareja);
-    return { idParejaA: pareja.idParejaA, idParejaB: pareja.idParejaB };
+    const payload = { idParejaA, idParejaB, idPareja };
+    console.log('Enviando evento pareja_deleted con payload:', payload);
+    this.natsService.emit('pareja_deleted', payload);
+    return { idParejaA, idParejaB };
   }
 }

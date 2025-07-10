@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ParejasService } from './parejas.service';
 import { CreateParejaDto } from './dto/create-pareja.dto';
 import { UpdateParejaDto } from './dto/update-pareja.dto';
+import { EventPattern } from '@nestjs/microservices';
 
 @Controller('parejas')
 export class ParejasController {
@@ -31,4 +32,6 @@ export class ParejasController {
   remove(@Param('id') id: string) {
     return this.parejasService.remove(+id);
   }
+
+  
 }
