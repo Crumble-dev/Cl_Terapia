@@ -8,7 +8,7 @@ import { Module } from "@nestjs/common";
         name: 'NATS_SERVICE',
         transport: Transport.NATS,
         options: {
-          servers: ['nats://localhost:4222'],
+          servers: ['nats://34.239.90.112:4222'],
         }
       },
     ]),

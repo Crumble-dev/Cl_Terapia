@@ -37,7 +37,7 @@ export class ParejasService {
 
   async remove(id: number): Promise<{ idParejaA: number; idParejaB: number }> {
     const pareja = await this.findOne(id);
-    // Guarda los datos antes de eliminar
+ 
     const idPareja = pareja.id;
     const idParejaA = pareja.idParejaA;
     const idParejaB = pareja.idParejaB;
