@@ -3,10 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ParejasService } from './parejas.service';
 import { ParejasController } from './parejas.controller';
 import { Pareja } from './entities/pareja.entity';
-import { BrokerModule } from 'src/broker/broker.module';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Pareja]), BrokerModule],
+  imports: [TypeOrmModule.forFeature([Pareja]), HttpModule],
   controllers: [ParejasController],
   providers: [ParejasService],
 })
