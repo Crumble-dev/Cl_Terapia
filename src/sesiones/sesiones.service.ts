@@ -27,8 +27,14 @@ export class SesionesService {
     en7dias.setDate(hoy.getDate() + 7);
     return this.sesionRepository.find({
       where: {
-        fechaSesion: Between(hoy.toISOString().slice(0, 10), en7dias.toISOString().slice(0, 10)),
+        creadoEn: Between(hoy.toISOString().slice(0, 10), en7dias.toISOString().slice(0, 10)),
       },
+    });
+  }
+
+  async findByPsychologist(psychologistId: number): Promise<Sesion[]> {
+    return this.sesionRepository.find({
+      where: { psychologistId },
     });
   }
 

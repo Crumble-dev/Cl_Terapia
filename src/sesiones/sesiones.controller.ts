@@ -22,6 +22,11 @@ export class SesionesController {
     return this.sesionesService.findProximas7Dias();
   }
 
+  @Get('psicologo/:psychologistId')
+  findByPsychologist(@Param('psychologistId') psychologistId: string) {
+    return this.sesionesService.findByPsychologist(+psychologistId);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateSesionDto: UpdateSesionDto) {
     return this.sesionesService.update(+id, updateSesionDto);
