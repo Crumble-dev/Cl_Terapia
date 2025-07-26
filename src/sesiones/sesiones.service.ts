@@ -22,12 +22,14 @@ export class SesionesService {
   }
 
   async findProximas7Dias(): Promise<Sesion[]> {
-    const hoy = new Date();
-    const en7dias = new Date();
-    en7dias.setDate(hoy.getDate() + 7);
+    const fechaLimite = new Date();
+    fechaLimite.setDate(fechaLimite.getDate() + 7);
     return this.sesionRepository.find({
       where: {
-        creadoEn: Between(hoy.toISOString().slice(0, 10), en7dias.toISOString().slice(0, 10)),
+        fechaHora: Between(new Date(), fechaLimite),
+      },
+      order: {
+        fechaHora: 'ASC',
       },
     });
   }
