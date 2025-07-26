@@ -35,8 +35,8 @@ export class Sesion {
   @Column({ type: 'text', nullable: true })
   descripcion: string;
 
-  @Column({ type: 'datetime' })
-  fechaHora: Date;
+  @Column({ type: 'datetime', nullable: true })
+  fechaHora: Date | null;
 
   @Column()
   duracionMinutos: number;
