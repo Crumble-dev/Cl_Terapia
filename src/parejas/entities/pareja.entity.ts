@@ -17,6 +17,9 @@ export class Pareja {
   @Column()
   idParejaB: number;
 
+  @Column()
+  psychologistId: number; // <-- Nuevo campo para el id del psicólogo
+
   @Column({ type: 'enum', enum: EstatusPareja, default: EstatusPareja.ACTIVA })
   estatus: EstatusPareja;
 

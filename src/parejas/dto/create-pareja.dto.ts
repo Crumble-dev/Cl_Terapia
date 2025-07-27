@@ -8,6 +8,9 @@ export class CreateParejaDto {
   @IsNumber()
   idParejaB: number;
 
+  @IsNumber()
+  psychologistId: number;
+
   @IsOptional()
   @IsEnum(EstatusPareja)
   estatus?: EstatusPareja;
