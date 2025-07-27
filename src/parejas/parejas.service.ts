@@ -97,4 +97,21 @@ export class ParejasService {
     await this.parejaRepository.remove(pareja);
     return { idParejaA: pareja.idParejaA, idParejaB: pareja.idParejaB };
   }
+
+  async findByPsychologist(psychologistId: number) {
+    const parejas = await this.parejaRepository.find({ where: { psychologistId } });
+    return Promise.all(
+      parejas.map(async (p) => {
+        const miembroA = await this.getUsuarioById(p.idParejaA);
+        const miembroB = await this.getUsuarioById(p.idParejaB);
+        return {
+          id: p.id,
+          estatus: p.estatus,
+          objetivosTerapia: p.objetivosTerapia,
+          fechaCreacion: p.fechaCreacion,
+          miembros: [miembroA, miembroB],
+        };
+      })
+    );
+  }
 }

@@ -127,4 +127,9 @@ export class ParejasController {
   remove(@Param('id') id: string) {
     return this.parejasService.remove(+id);
   }
+
+  @Get('psicologo/:psychologistId')
+  findByPsychologist(@Param('psychologistId') psychologistId: string) {
+    return this.parejasService.findByPsychologist(+psychologistId);
+  }
 }
