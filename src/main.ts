@@ -4,6 +4,15 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Habilitar CORS para orígenes específicos
+  app.enableCors({
+    origin: [
+      'https://dasboardadmincl.netlify.app/',
+      'http://localhost:5173'
+    ]
+  });
+
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.NATS,
     options:{
